@@ -1,0 +1,69 @@
+Write a spring boot REST application which will provide following CRUD operations for "Ticket" resource of a Telcom company.
+1. Create new Ticket
+2. Update Ticket details (Only status, resolution details, resolution date time can be updated)
+3. Fetch all open Tickets.
+4. Fetch Ticket by ID
+
+Ticket has the following attributes:
+a. ID (unique identifier for each Ticket)
+b. Requester Registered Phone Number (unique for each user)
+c. Category (Enum, example: SIM, CALLING, BROADBAND)
+d. Issue Details
+e. Resolution Details
+f. Status (Enum, example: OPEN, IN_PROGRESS, RESOLVED)
+g. Create Date Time
+h. Resolution Date Time
+You can use any relational database.
+
+Rest URL should be named as per REST best practices.
+Response codes should be as per REST guidelines.
+Error handling in case of failures.
+
+Marks Distribution:
+Implementation of Create Ticket [8 Marks]
+Implementation of Update Ticket [8 Marks]
+Implementation of Get Ticket by ID [5 Marks]
+Implementation of Get all open tickets[8 Marks]
+Proper response codes for GET & POST [6 Marks]
+Error Handling [5 Marks]
+
+
+CREATE TABLE Ticket (
+    id INT AUTO_INCREMENT PRIMARY KEY, 						-- Unique identifier for each ticket
+    requesterphonenumber VARCHAR(15) NOT NULL UNIQUE, 	-- Unique phone number per user
+    category ENUM('SIM', 'CALLING', 'BROADBAND') NOT NULL, 	-- Category enum
+    issuedetails TEXT NOT NULL, 							-- Details of the issue
+    resolutiondetails TEXT, 								-- Resolution details (can be NULL initially)
+    status ENUM('OPEN', 'IN_PROGRESS', 'RESOLVED') DEFAULT 'OPEN',		-- Status of the ticket
+    createdatetime DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, 		-- Automatically set at creation
+    resolutiondatetime DATETIME DEFAULT NULL 							-- Can be updated when the issue is resolved
+);
+
+
+-- Ticket 1: An open ticket
+INSERT INTO Ticket (requesterphonenumber, category, issuedetails)
+VALUES ('9876543210', 'CALLING', 'Unable to make outgoing calls.');
+
+-- Ticket 2: A ticket in progress
+INSERT INTO Ticket (requesterphonenumber, category, issuedetails, status)
+VALUES ('9123456789', 'BROADBAND', 'Internet is down since last night.', 'IN_PROGRESS');
+
+-- Ticket 3: A resolved ticket with resolution details
+INSERT INTO Ticket (requesterphonenumber, category, issuedetails, resolutiondetails, status, resolutiondatetime)
+VALUES ('7012345678', 'SIM', 'SIM card not activated.', 
+        'SIM card activated successfully.', 'RESOLVED', '2024-12-28 10:30:00');
+
+-- Ticket 4: Another open ticket
+INSERT INTO Ticket (requesterphonenumber, category, issuedetails)
+VALUES ('8901234567', 'CALLING', 'Call drops frequently.');
+
+-- Ticket 5: A resolved ticket for broadband
+INSERT INTO Ticket (requesterphonenumber, category, issuedetails, resolutiondetails, status, resolutiondatetime)
+VALUES ('8080808080', 'BROADBAND', 'Low internet speed.', 
+        'Upgraded plan and optimized network settings.', 'RESOLVED', '2024-12-28 15:00:00');
+
+
+
+
+
+

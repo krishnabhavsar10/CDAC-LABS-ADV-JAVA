@@ -1,0 +1,7 @@
+package fi.hibernate.entity;
+
+@Entity
+@Table(name="users")
+public class Users {
+	
+}

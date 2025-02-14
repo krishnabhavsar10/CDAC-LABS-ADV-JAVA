@@ -1,0 +1,5 @@
+package fi.hibernate_pureannotation;
+
+public class Users {
+
+}

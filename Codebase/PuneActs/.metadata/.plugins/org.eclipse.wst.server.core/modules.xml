@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<modules>
+  <module moduleId="org.eclipse.jst.jee.server:FirstWebApplication" serverId="Tomcat v11.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:FirstJSPApplication" serverId="Tomcat v11.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:OnlineShopping" serverId="Tomcat v11.0 Server at localhost"/>
+</modules>
